@@ -14,33 +14,41 @@ const AddExpense = (props) => {
       setExpenseList([...expenseList, newExpense]);
       setReason("");
       setCost("");
-    } else alert("Please fill out all fields");
+    } else {
+      alert("Please fill out all fields");
+      return;
+    }
     props.spentAmount();
     props.remainingAmount();
   }
 
+  const isDisabled = props.remaining === 0;
   //todo: render Data
   return (
     <div className="addExpense">
       <h2>Add Expenses</h2>
-      <div className="name">
-        <label htmlFor="name">Reason</label>
-        <input
-          type="text"
-          onChange={(e) => setReason(e.target.value)}
-          value={reason}
-        />
-      </div>
-      <div className="cost">
-        <label htmlFor="cost">Cost</label>
-        <input
-          type="number"
-          min={0}
-          value={cost}
-          onChange={(e) => setCost(e.target.value)}
-        />
-      </div>
-      <button onClick={addExpense}>Save</button>
+      <input
+        type="text"
+        onChange={(e) => setReason(e.target.value)}
+        value={reason}
+        placeholder="What's the purpose of this expense?"
+        className="reason"
+        disabled={isDisabled}
+      />
+      <input
+        type="number"
+        min={0}
+        value={cost}
+        onChange={(e) => setCost(e.target.value)}
+        placeholder="Cost"
+        className="cost"
+        disabled={isDisabled}
+      />
+      <button 
+        className="save" 
+        onClick={addExpense} 
+        disabled={isDisabled}
+      >Add Expense</button>
     </div>
   );
 };

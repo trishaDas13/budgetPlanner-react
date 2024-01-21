@@ -31,17 +31,16 @@ const ExpenseList = (props) => {
     //todo: render Data
   return (
     <div className='expenseList'>
-        <h2>Expense List</h2>
         {
             expenseList.length === 0 ? 
-            (<p>Add Data To List . . . . .</p>):
+            (<p className='noData'>Add Data To List . . . . .</p>):
             (
                 expenseList.map((item, idx)=>{
                     return(
                         <div key={nanoid()} className="single_expense">
-                            <span className="reason">{item.reason}</span>
-                            <span className="cost">{item.cost}</span>
-                            <button onClick={()=> deleteExpense(idx, item.cost)}>del</button>
+                            <span>{item.reason}</span>
+                            <span>{item.cost}</span>
+                            <button onClick={()=> deleteExpense(idx, item.cost)}>X</button>
                         </div>
                     )
                 })

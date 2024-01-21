@@ -44,18 +44,20 @@ const Budget = () => {
 
   return (
     <>
-      <nav>My Budget Planner</nav>
+      <nav> 💰 My Budget Planner</nav>
       <main>
         <div className="budget">
           <p>Budget : 2000</p>
           <p>Remaining : {remaining}</p>
           <p>Spent so far : {spent}</p>
         </div>
-        <ExpenseList spentAmountDel={spentAmountDel} />
+
         <AddExpense
           spentAmount={spentAmountSave}
           remainingAmount={remainingAmountSave}
+          remaining = {remaining}
         />
+        <ExpenseList spentAmountDel={spentAmountDel} />
       </main>
     </>
   );
