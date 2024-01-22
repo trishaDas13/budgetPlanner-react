@@ -21,12 +21,13 @@ const AddExpense = (props) => {
     props.spentAmount();
     props.remainingAmount();
   }
+  const isDisabled = props.remaining <= 0;
 
-  const isDisabled = props.remaining === 0;
+  
+
   //todo: render Data
   return (
     <div className="addExpense">
-      <h2>Add Expenses</h2>
       <input
         type="text"
         onChange={(e) => setReason(e.target.value)}

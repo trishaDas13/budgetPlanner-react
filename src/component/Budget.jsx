@@ -1,7 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import ExpenseList from "./ExpenseList";
 import AddExpense from "./AddExpense";
 import { useBudget } from "../context/BudgetContext";
+
+const reducer = (state, action) =>{
+  switch(action.type){
+    case 'ADD100':
+      return state + 100
+     case 'ADD500':
+      return state + 500
+    case 'ADD1000':
+      return state + 1000
+    case 'SET_BUDGET':
+      return action.payload
+    case 'RESET' :
+      return 2000;
+    default :
+      return state;
+  }
+}
 
 const Budget = () => {
   const { cost } = useBudget(); //* contextAPI
@@ -19,7 +36,10 @@ const Budget = () => {
       : 0
   );
 
-  //todo: set in the local storage
+  const initState  = JSON.parse(localStorage.getItem("budget")) || 2000; //* use reducer
+  const[state, dispatch] = useReducer(reducer, initState ); 
+
+  //todo: set in the local storage >> all useEffect fn.
   useEffect(() => {
     localStorage.setItem("spent", JSON.stringify(spent));
   }, [spent]);
@@ -27,6 +47,11 @@ const Budget = () => {
   useEffect(() => {
     localStorage.setItem("remaining", JSON.stringify(remaining));
   }, [remaining]);
+
+  useEffect(() => {
+    localStorage.setItem("budget", JSON.stringify(state));
+    setRemaining(prevRemaining => prevRemaining + (state - initState));
+  }, [state]);
 
   //todo: function to handle spent and remaining value
   function spentAmountSave() {
@@ -41,17 +66,28 @@ const Budget = () => {
     setSpent((prevSpent) => parseInt(prevSpent) - parseInt(deletedExpenseCost));
     setRemaining((prevRemaining) => parseInt(prevRemaining) + parseInt(deletedExpenseCost));
   }
+  //todo: Dispatch the RESET action and update remaining to 2000
+  const handleReset = () => {
+    dispatch({ type: 'RESET' });
+    setRemaining(state);
+  };
 
   return (
     <>
       <nav> 💰 My Budget Planner</nav>
       <main>
         <div className="budget">
-          <p>Budget : 2000</p>
+          <p>Budget : {state}</p>
           <p>Remaining : {remaining}</p>
           <p>Spent so far : {spent}</p>
         </div>
-
+        <div className="increasebtns">
+          <h3>Add Budget</h3>
+          <button onClick={() => dispatch({type: "ADD100"})}> + 100 💲</button>
+          <button onClick={() => dispatch({type: "ADD500"})}> + 500 </button>
+          <button onClick={() => dispatch({type: "ADD1000"})}> + 1000 </button>
+          <button onClick={handleReset}> Reset </button>
+        </div>
         <AddExpense
           spentAmount={spentAmountSave}
           remainingAmount={remainingAmountSave}
