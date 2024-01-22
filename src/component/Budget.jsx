@@ -82,8 +82,8 @@ const Budget = () => {
           <p>Spent so far : {spent}</p>
         </div>
         <div className="increasebtns">
-          <h3>Add Budget</h3>
-          <button onClick={() => dispatch({type: "ADD100"})}> + 100 💲</button>
+          <h3>Add Budget :</h3>
+          <button onClick={() => dispatch({type: "ADD100"})}> + 100 </button>
           <button onClick={() => dispatch({type: "ADD500"})}> + 500 </button>
           <button onClick={() => dispatch({type: "ADD1000"})}> + 1000 </button>
           <button onClick={handleReset}> Reset </button>

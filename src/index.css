@@ -19,32 +19,26 @@ body{
 nav{
   background-color: rgb(117, 106, 182);
   font-weight: 500;
-  font-size: 28px;
-  padding: 0.7rem 2rem;
+  font-size: 20px;
+  padding: 0.5rem 2rem;
   color: rgb(255, 229, 229);
   width: 100%;
+  text-align: center;
+  box-shadow: 0 0 10px grey;
 }
 main{
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 30px;
 }
 .budget{
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 2rem 0;
-  width: 850px;
+  gap: 50px;
   flex-wrap: wrap;
-}
-.budget p{
-  border: 1px dashed rgba(0, 0, 0, 0.568);
-  padding: 1rem 2.5rem;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  background-color: #D9EDBF;
-  box-shadow: 6px 6px 1px rgba(128, 128, 128, 0.616);
 }
 .noData, .single_expense{
   text-align: center;
@@ -122,4 +116,35 @@ input:focus{
 }
 .save:disabled{
   opacity: 0.65;
+}
+.increasebtns{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.increasebtns button, .budget p{
+  padding: 0.2rem 0.7rem;
+  font-size: 12px;
+  cursor: pointer;
+  background-color:rgba(76, 0, 130, 0.801);
+  border: none;
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.increasebtns button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 0 8px grey;
+}
+.budget p{
+  width: 180px;
+  text-align: center;
+  box-shadow: 3px 3px 1px rgb(0, 0, 0);
+  font-size: 16px;
+}
+.single_expense span{
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: start;
 }
